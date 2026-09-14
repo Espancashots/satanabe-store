@@ -1,28 +1,25 @@
-# Satanabe Store v2
+# Satanabe Store v3
 
-Loja estática responsiva para PC, tablet e mobile.
+Versão final compacta em vermelho + preto, pensada para PC e mobile.
 
-## Arquivos
+## Mudanças
+- Fonte mais simples e forte
+- Vermelho/preto com alto contraste
+- Emojis 👺🔥👹 integrados ao layout
+- Home bem mais curta
+- Planos em 3 colunas no PC e 2 colunas no mobile
+- Checkout compacto
+- QR Code PIX e Copia e Cola com o valor do plano
+- Botão “Já paguei” abre o WhatsApp
+- Plano de 3 horas continua grátis
+
+## Publicação
+Suba:
 - index.html
 - pagamento.html
 - styles.css
 - app.js
-- assets/pix-*.png
+- pasta assets
 
-## Fluxo
-1. Cliente escolhe o plano.
-2. Página de checkout mostra QR Code PIX e PIX Copia e Cola com o valor.
-3. Cliente toca em "Já fiz o pagamento".
-4. O WhatsApp é aberto com plano, valor e código do pedido.
-5. Cliente envia o comprovante.
-6. A key é gerada manualmente no painel administrativo.
-
-O plano de 3 horas é grátis e vai direto para o WhatsApp.
-
-## Publicação no GitHub Pages
-Suba todos os arquivos e a pasta `assets` na raiz do repositório.
-Depois:
+No GitHub Pages:
 Settings → Pages → Deploy from a branch → main → /(root)
-
-## Responsividade
-Um único código atende PC e mobile usando breakpoints em `styles.css`.

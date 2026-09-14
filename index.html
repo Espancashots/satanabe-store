@@ -2,224 +2,83 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#07070b">
-  <meta name="description" content="Satanabe Store — escolha seu plano, pague via PIX e envie o comprovante pelo WhatsApp.">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
   <title>Satanabe Store</title>
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-shell">
-      <a href="#inicio" class="logo">
-        <span class="logo-box">S</span>
-        <span class="logo-text">
-          <strong>SATANABE</strong>
-          <small>STORE</small>
-        </span>
-      </a>
-
-      <nav class="desktop-nav" aria-label="Navegação principal">
-        <a href="#inicio">Início</a>
-        <a href="#vantagens">Vantagens</a>
-        <a href="#como-funciona">Como comprar</a>
-        <a href="#planos">Planos</a>
-        <a href="#faq">Dúvidas</a>
-      </nav>
-
-      <a class="header-cta" href="#planos">Ver planos</a>
-      <button id="menuBtn" class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
-    </div>
-
-    <nav id="mobileNav" class="mobile-nav" aria-label="Navegação mobile">
-      <a href="#inicio">Início</a>
-      <a href="#vantagens">Vantagens</a>
-      <a href="#como-funciona">Como comprar</a>
-      <a href="#planos">Planos</a>
-      <a href="#faq">Dúvidas</a>
-    </nav>
+  <header class="topbar">
+    <a class="brand" href="#top">
+      <span class="brand-emoji">👹</span>
+      <span><b>SATANABE</b><small>STORE</small></span>
+    </a>
+    <a class="top-wa" href="https://wa.me/5521987269193" target="_blank" rel="noopener">WhatsApp</a>
   </header>
 
-  <main>
-    <section id="inicio" class="hero">
-      <div class="hero-orb hero-orb-a"></div>
-      <div class="hero-orb hero-orb-b"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="kicker"><span class="dot"></span> PAGAMENTO VIA PIX</span>
-          <h1>Escolha seu acesso.<br><span>Pague. Envie o comprovante.</span></h1>
-          <p>Selecione o período ideal, faça o PIX e fale comigo no WhatsApp. Após a conferência do comprovante, eu gero sua key pelo painel administrativo.</p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#planos">Ver todos os planos</a>
-            <a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/5521987269193">Falar no WhatsApp</a>
-          </div>
-          <div class="hero-chips">
-            <span>✓ PIX direto</span>
-            <span>✓ Atendimento no WhatsApp</span>
-            <span>✓ Confirmação manual</span>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <span class="card-label">DESTAQUE</span>
-          <h2>30 dias</h2>
-          <div class="hero-price">R$ 9<span>,00</span></div>
-          <p>Para quem quer ficar mais tempo sem precisar renovar toda hora.</p>
-          <a class="btn primary full" href="pagamento.html?plano=30d">Comprar agora</a>
-          <small>Você será direcionado para a página de pagamento.</small>
-        </div>
+  <main id="top">
+    <section class="hero compact">
+      <div class="hero-fire">🔥</div>
+      <div class="hero-copy">
+        <span class="eyebrow">PIX • RÁPIDO • DIRETO</span>
+        <h1>ESCOLHE.<br><span>PAGA.</span><br>MANDA O COMPROVANTE.</h1>
+        <p>Sem cadastro gigante. Escolha o tempo, faça o PIX e me chama no WhatsApp.</p>
+        <a class="btn red full-mobile" href="#planos">VER PLANOS 👺</a>
+      </div>
+      <div class="hero-badge">
+        <div class="monster">👺</div>
+        <strong>30 DIAS</strong>
+        <span>R$ 9,00</span>
+        <a href="pagamento.html?plano=30d">Comprar</a>
       </div>
     </section>
 
-    <section id="vantagens" class="section">
-      <div class="container">
-        <div class="section-heading centered">
-          <span class="eyebrow">VANTAGENS</span>
-          <h2>Compra simples, sem enrolação</h2>
-          <p>Um fluxo direto para você escolher, pagar e falar comigo.</p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3>Processo rápido</h3>
-            <p>Você escolhe o plano, faz o PIX e envia o comprovante no WhatsApp.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">◈</div>
-            <h3>PIX direto</h3>
-            <p>QR Code e PIX Copia e Cola já aparecem com o valor correto do plano.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">💬</div>
-            <h3>Atendimento direto</h3>
-            <p>Depois de pagar, um botão abre meu WhatsApp com a mensagem pronta.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">🔑</div>
-            <h3>Key gerada por mim</h3>
-            <p>Após conferir o pagamento, eu gero sua key no painel administrativo.</p>
-          </article>
-        </div>
-      </div>
+    <section class="strip">
+      <span>🔥 PIX</span>
+      <span>👹 WHATSAPP</span>
+      <span>👺 LIBERAR KEY</span>
     </section>
 
-    <section id="como-funciona" class="section section-alt">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">COMO FUNCIONA</span>
-          <h2>Da escolha até a sua key</h2>
-        </div>
-
-        <div class="steps">
-          <article class="step">
-            <span class="step-number">01</span>
-            <div>
-              <h3>Escolha</h3>
-              <p>Selecione o período que deseja usar.</p>
-            </div>
-          </article>
-          <article class="step">
-            <span class="step-number">02</span>
-            <div>
-              <h3>Pague</h3>
-              <p>Use o QR Code PIX ou copie o código Pix Copia e Cola.</p>
-            </div>
-          </article>
-          <article class="step">
-            <span class="step-number">03</span>
-            <div>
-              <h3>Envie</h3>
-              <p>Toque em “Já fiz o pagamento” e envie o comprovante no WhatsApp.</p>
-            </div>
-          </article>
-          <article class="step">
-            <span class="step-number">04</span>
-            <div>
-              <h3>Receba</h3>
-              <p>Após a conferência, sua key é gerada manualmente.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="planos" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">PLANOS</span>
-          <h2>Escolha o tempo ideal</h2>
-          <p>Todos os preços abaixo são pagamento único.</p>
-        </div>
-
-        <div id="plansGrid" class="plans-grid"></div>
-      </div>
-    </section>
-
-    <section class="section trust-section">
-      <div class="container trust-card">
+    <section id="planos" class="plans-section">
+      <div class="section-head">
         <div>
-          <span class="eyebrow">ATENDIMENTO</span>
-          <h2>Terminou o pagamento?</h2>
-          <p>Envie o comprovante no WhatsApp para eu conferir e gerar sua key.</p>
+          <span class="eyebrow">PLANOS</span>
+          <h2>ESCOLHA SEU TEMPO</h2>
         </div>
-        <a class="btn primary" href="https://wa.me/5521987269193" target="_blank" rel="noopener">Abrir WhatsApp</a>
+        <small>Pagamento único</small>
       </div>
+      <div id="plansGrid" class="plans-grid"></div>
     </section>
 
-    <section id="faq" class="section section-alt">
-      <div class="container">
-        <div class="section-heading centered">
-          <span class="eyebrow">DÚVIDAS FREQUENTES</span>
-          <h2>Antes de comprar</h2>
-        </div>
+    <section class="how">
+      <article><b>1</b><span>Escolha</span></article>
+      <article><b>2</b><span>Pague</span></article>
+      <article><b>3</b><span>Envie</span></article>
+      <article><b>4</b><span>Receba</span></article>
+    </section>
 
-        <div class="faq-list">
-          <details>
-            <summary>Como recebo a key?</summary>
-            <p>Depois de fazer o pagamento, toque em “Já fiz o pagamento”. O site abre o WhatsApp com os dados do pedido. Envie o comprovante e, após a conferência, a key é gerada manualmente.</p>
-          </details>
-          <details>
-            <summary>O plano de 3 horas é realmente grátis?</summary>
-            <p>Sim. Ao selecionar 3 horas, você pula a tela de PIX e vai direto para solicitar a key pelo WhatsApp.</p>
-          </details>
-          <details>
-            <summary>O site confirma o PIX automaticamente?</summary>
-            <p>Não. A confirmação é manual. O comprovante é enviado pelo WhatsApp e o pagamento é conferido antes da geração da key.</p>
-          </details>
-          <details>
-            <summary>Posso pagar usando PIX Copia e Cola?</summary>
-            <p>Sim. Na página de pagamento você pode usar o QR Code ou copiar o código PIX com o valor do plano já configurado.</p>
-          </details>
-          <details>
-            <summary>Fechei a página depois de pagar. O que faço?</summary>
-            <p>Abra o WhatsApp e informe qual plano comprou, o valor pago e envie o comprovante.</p>
-          </details>
-        </div>
-      </div>
+    <section class="mini-faq">
+      <details>
+        <summary>Como recebo a key? <span>+</span></summary>
+        <p>Depois do PIX, toque em “Já paguei”, envie o comprovante no WhatsApp e eu gero a key manualmente.</p>
+      </details>
+      <details>
+        <summary>O plano de 3 horas é grátis? <span>+</span></summary>
+        <p>Sim. Ele vai direto para o WhatsApp, sem PIX.</p>
+      </details>
+      <details>
+        <summary>Posso usar PIX Copia e Cola? <span>+</span></summary>
+        <p>Sim. O checkout mostra QR Code e Copia e Cola com o valor do plano.</p>
+      </details>
+    </section>
+
+    <section class="final-cta">
+      <div><span>👹</span><strong>JÁ PAGOU?</strong><small>Envie o comprovante agora.</small></div>
+      <a class="btn red" href="https://wa.me/5521987269193" target="_blank" rel="noopener">ABRIR WHATSAPP 🔥</a>
     </section>
   </main>
 
-  <a class="whatsapp-float" href="https://wa.me/5521987269193" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="logo footer-logo">
-          <span class="logo-box">S</span>
-          <span class="logo-text"><strong>SATANABE</strong><small>STORE</small></span>
-        </div>
-        <p>Pagamento via PIX com confirmação manual pelo WhatsApp.</p>
-      </div>
-      <div class="footer-links">
-        <a href="#planos">Planos</a>
-        <a href="#faq">Dúvidas</a>
-        <a href="https://wa.me/5521987269193" target="_blank" rel="noopener">Suporte</a>
-      </div>
-    </div>
-    <div class="container footer-bottom">© 2026 Satanabe Store.</div>
-  </footer>
-
-  <script src="app.js?v=2"></script>
+  <footer>© 2026 Satanabe Store</footer>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
