@@ -3,81 +3,111 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#070b16">
-  <title>Satanabe — Pagamento</title>
-  <link rel="stylesheet" href="styles.css?v=1">
+  <meta name="theme-color" content="#07070b">
+  <title>Pagamento — Satanabe Store</title>
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
-<body>
-  <header class="topbar compact">
-    <a class="back-link" href="index.html">← Voltar</a>
-    <div class="brand-mini">SATANABE</div>
+<body class="checkout-page">
+  <header class="checkout-header">
+    <div class="container nav-shell">
+      <a href="index.html" class="logo">
+        <span class="logo-box">S</span>
+        <span class="logo-text"><strong>SATANABE</strong><small>STORE</small></span>
+      </a>
+      <a class="back-link" href="index.html#planos">← Voltar aos planos</a>
+    </div>
   </header>
 
-  <main class="shell payment-shell">
-    <section class="payment-layout">
-      <article class="checkout-card">
-        <span class="eyebrow">SEU PEDIDO</span>
-        <h1 id="planTitle">Carregando...</h1>
-        <div class="price-big" id="planPrice"></div>
-        <div class="order-box">
+  <main class="container checkout-main">
+    <div class="checkout-title">
+      <span class="eyebrow">CHECKOUT PIX</span>
+      <h1>Finalize seu pedido</h1>
+      <p>Confira os dados abaixo e faça o pagamento.</p>
+    </div>
+
+    <div class="checkout-grid">
+      <aside class="order-summary">
+        <span class="mini-label">RESUMO</span>
+        <h2 id="checkoutPlan">—</h2>
+        <div id="checkoutPrice" class="checkout-price">—</div>
+
+        <div class="summary-line">
           <span>Pedido</span>
-          <strong id="orderId"></strong>
+          <strong id="orderId">—</strong>
         </div>
 
-        <div class="form-grid">
-          <label>
-            Seu nome
-            <input id="customerName" type="text" placeholder="Ex.: João" autocomplete="name">
-          </label>
-          <label>
-            Seu WhatsApp
-            <input id="customerPhone" type="tel" inputmode="tel" placeholder="(21) 99999-9999">
-          </label>
+        <div class="summary-line">
+          <span>Pagamento</span>
+          <strong>PIX</strong>
         </div>
-        <p class="hint">Esses dados só são usados para montar a mensagem do seu atendimento no WhatsApp.</p>
-      </article>
 
-      <article id="paidArea" class="pix-card">
-        <div class="pix-head">
+        <div class="summary-line">
+          <span>Confirmação</span>
+          <strong>Manual</strong>
+        </div>
+
+        <hr>
+
+        <label class="field">
+          <span>Seu nome <small>(opcional)</small></span>
+          <input id="customerName" type="text" autocomplete="name" placeholder="Seu nome">
+        </label>
+
+        <label class="field">
+          <span>Seu WhatsApp <small>(opcional)</small></span>
+          <input id="customerPhone" type="tel" inputmode="tel" placeholder="(21) 99999-9999">
+        </label>
+      </aside>
+
+      <section id="pixPanel" class="payment-panel">
+        <div class="payment-panel-head">
           <div>
-            <span class="eyebrow">PAGAMENTO</span>
-            <h2>Faça o PIX</h2>
+            <span class="mini-label">PAGAMENTO</span>
+            <h2>Escaneie o QR Code</h2>
           </div>
-          <span class="status-pill">Aguardando pagamento</span>
+          <span class="pending-badge">Aguardando</span>
         </div>
 
-        <div class="qr-wrap">
+        <div class="qr-card">
           <img id="pixQr" alt="QR Code PIX">
         </div>
 
-        <div class="recipient">
+        <div class="payee">
           <span>Recebedor</span>
           <strong>JOAO P M BAPTISTA</strong>
         </div>
 
-        <label class="copy-label">PIX Copia e Cola</label>
-        <div class="copy-row">
+        <div class="pix-copy-block">
+          <label>PIX Copia e Cola</label>
           <textarea id="pixCode" readonly rows="4"></textarea>
-          <button id="copyPix" class="btn secondary" type="button">Copiar PIX</button>
+          <button id="copyPix" class="btn ghost full" type="button">Copiar PIX</button>
         </div>
 
-        <div class="warning">
-          <strong>Importante:</strong> depois do PIX, toque no botão abaixo e envie o comprovante no WhatsApp. O acesso é liberado após conferência manual.
+        <div class="payment-alert">
+          <strong>Depois de pagar:</strong>
+          toque em “Já fiz o pagamento”. O WhatsApp será aberto com uma mensagem pronta. Envie o comprovante para eu conferir.
         </div>
 
-        <button id="confirmPayment" class="btn primary big" type="button">Já fiz o pagamento</button>
-      </article>
+        <button id="paidBtn" class="btn primary full large" type="button">Já fiz o pagamento</button>
+      </section>
 
-      <article id="freeArea" class="pix-card hidden">
-        <span class="eyebrow">PLANO GRATUITO</span>
-        <h2>Nenhum pagamento necessário</h2>
-        <p>Toque abaixo para solicitar sua key de 3 horas diretamente pelo WhatsApp.</p>
-        <button id="requestFree" class="btn primary big" type="button">Solicitar key grátis</button>
-      </article>
-    </section>
+      <section id="freePanel" class="payment-panel hidden">
+        <div class="payment-panel-head">
+          <div>
+            <span class="mini-label">PLANO GRÁTIS</span>
+            <h2>Sem pagamento</h2>
+          </div>
+          <span class="free-badge">Grátis</span>
+        </div>
+
+        <div class="free-hero">3H</div>
+        <p class="free-copy">Esse plano não exige PIX. Toque abaixo para solicitar sua key pelo WhatsApp.</p>
+        <button id="freeBtn" class="btn primary full large" type="button">Solicitar key grátis</button>
+      </section>
+    </div>
   </main>
 
-  <div id="toast" class="toast" role="status"></div>
-  <script src="app.js?v=1"></script>
+  <div id="toast" class="toast">PIX copiado</div>
+  <script src="app.js?v=2"></script>
 </body>
 </html>
