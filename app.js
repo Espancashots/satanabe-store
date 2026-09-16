@@ -1,108 +1,168 @@
-const PLANS = {"3h": {"id": "3h", "name": "3H", "label": "3 horas", "price": 0.0, "tag": "GRÁTIS", "emoji": "👺"}, "10h": {"id": "10h", "name": "10H", "label": "10 horas", "price": 2.0, "emoji": "🔥", "pix": "00020101021126360014br.gov.bcb.pix0114+552197355481052040000530398654042.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63040AE5", "qr": "assets/pix-10h.png"}, "1d": {"id": "1d", "name": "1D", "label": "1 dia", "price": 3.0, "emoji": "👹", "pix": "00020101021126360014br.gov.bcb.pix0114+552197355481052040000530398654043.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63041919", "qr": "assets/pix-1d.png"}, "3d": {"id": "3d", "name": "3D", "label": "3 dias", "price": 4.0, "emoji": "🔥", "pix": "00020101021126360014br.gov.bcb.pix0114+552197355481052040000530398654044.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***630462ED", "qr": "assets/pix-3d.png"}, "7d": {"id": "7d", "name": "7D", "label": "7 dias", "price": 5.0, "tag": "POPULAR", "emoji": "👺", "pix": "00020101021126360014br.gov.bcb.pix0114+552197355481052040000530398654045.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63047111", "qr": "assets/pix-7d.png"}, "30d": {"id": "30d", "name": "30D", "label": "30 dias", "price": 9.0, "tag": "MELHOR", "emoji": "👹", "pix": "00020101021126360014br.gov.bcb.pix0114+552197355481052040000530398654049.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***6304A101", "qr": "assets/pix-30d.png"}};
 const WHATSAPP = "5521987269193";
 
-function money(v) {
-  return v === 0 ? "Grátis" : `R$ ${v.toFixed(0)},00`;
+const PLANS = {
+  "3h": {
+    id: "3h", name: "3 HORAS", label: "3 horas", price: 4,
+    note: "Plano de entrada", qr: "assets/pix-3h.png",
+    pix: "00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe52040000530398654044.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63049FFD"
+  },
+  "10h": {
+    id: "10h", name: "10 HORAS", label: "10 horas", price: 8,
+    note: "Para usar por mais tempo", qr: "assets/pix-10h.png",
+    pix: "00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe52040000530398654048.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63044FED"
+  },
+  "1d": {
+    id: "1d", name: "1 DIA", label: "1 dia", price: 14,
+    note: "24 horas", qr: "assets/pix-1d.png",
+    pix: "00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe520400005303986540514.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***6304DF35"
+  },
+  "3d": {
+    id: "3d", name: "3 DIAS", label: "3 dias", price: 30,
+    note: "72 horas", qr: "assets/pix-3d.png",
+    pix: "00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe520400005303986540530.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63043C40"
+  },
+  "7d": {
+    id: "7d", name: "7 DIAS", label: "7 dias", price: 40,
+    note: "Uma semana completa", tag: "POPULAR", qr: "assets/pix-7d.png",
+    pix: "00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe520400005303986540540.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***630407BC"
+  },
+  "1m": {
+    id: "1m", name: "1 MÊS", label: "1 mês", price: 70,
+    note: "Maior duração", tag: "MAIOR DURAÇÃO", qr: "assets/pix-1m.png",
+    pix: "00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe520400005303986540570.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***6304756B"
+  }
+};
+
+function money(value) {
+  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 0 }).format(value);
+}
+
+function normalizePhone(value = "") {
+  return value.replace(/\D/g, "").slice(0, 15);
 }
 
 function renderPlans() {
   const grid = document.getElementById("plansGrid");
   if (!grid) return;
-  grid.innerHTML = Object.values(PLANS).map(p => `
-    <article class="plan-card ${p.tag ? "hot" : ""}">
-      <div class="plan-top">
-        <span class="plan-emoji">${p.emoji}</span>
-        ${p.tag ? `<span class="plan-tag">${p.tag}</span>` : ""}
+
+  grid.innerHTML = Object.values(PLANS).map((plan, index) => `
+    <article class="plan-card ${plan.tag ? "featured" : ""}">
+      <div class="plan-card-top">
+        <span class="plan-number">0${index + 1}</span>
+        ${plan.tag ? `<span class="plan-tag">${plan.tag}</span>` : ""}
       </div>
-      <h3>${p.name}</h3>
-      <p>${p.label}</p>
-      <div class="plan-price ${p.tag ? "red" : ""}">${money(p.price)}</div>
-      <a class="btn red full" href="pagamento.html?plano=${p.id}">
-        ${p.price === 0 ? "PEGAR GRÁTIS" : "COMPRAR"}
-      </a>
+      <h3>${plan.name}</h3>
+      <p>${plan.note}</p>
+      <div class="plan-price"><strong>${money(plan.price)}</strong><small>pagamento único</small></div>
+      <a class="btn btn-primary btn-full" href="pagamento.html?plano=${plan.id}">Comprar</a>
+      ${plan.id === "3h" ? `<button class="plan-trial" type="button" data-trial>ou solicitar teste grátis</button>` : ""}
     </article>
   `).join("");
 }
 
-function makeOrderId() {
-  const d = new Date();
-  const date = String(d.getFullYear()).slice(-2) +
-    String(d.getMonth()+1).padStart(2,"0") +
-    String(d.getDate()).padStart(2,"0");
-  const rnd = Math.random().toString(36).slice(2,6).toUpperCase();
-  return `STB-${date}-${rnd}`;
+function getOrderId(planId = "") {
+  const key = `satanabe-order-${planId}`;
+  const existing = sessionStorage.getItem(key);
+  if (existing) return existing;
+  const now = new Date();
+  const date = `${String(now.getFullYear()).slice(-2)}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`;
+  const random = crypto?.getRandomValues
+    ? Array.from(crypto.getRandomValues(new Uint8Array(3))).map(v => (v % 36).toString(36)).join("").toUpperCase()
+    : Math.random().toString(36).slice(2, 5).toUpperCase();
+  const order = `STB-${date}-${random}`;
+  sessionStorage.setItem(key, order);
+  return order;
 }
 
 async function copyText(text) {
-  if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
-  const t = document.createElement("textarea");
-  t.value = text;
-  t.style.position = "fixed";
-  t.style.opacity = "0";
-  document.body.appendChild(t);
-  t.select();
-  document.execCommand("copy");
-  t.remove();
-}
-
-function showToast(text) {
-  const el = document.getElementById("toast");
-  if (!el) return;
-  el.textContent = text;
-  el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 1500);
-}
-
-function buildMessage(plan, orderId) {
-  const name = document.getElementById("customerName")?.value.trim() || "";
-  const phone = document.getElementById("customerPhone")?.value.trim() || "";
-  const extra = `${name ? `\nNome: ${name}` : ""}${phone ? `\nMeu WhatsApp: ${phone}` : ""}`;
-
-  if (plan.price === 0) {
-    return `👺 Olá! Quero solicitar a key do plano grátis de ${plan.label}.\nPedido: ${orderId}${extra}`;
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
   }
+  const area = document.createElement("textarea");
+  area.value = text;
+  area.setAttribute("readonly", "");
+  area.style.position = "fixed";
+  area.style.opacity = "0";
+  document.body.appendChild(area);
+  area.select();
+  document.execCommand("copy");
+  area.remove();
+}
 
-  return `🔥 Olá! Fiz o PIX do plano de ${plan.label} no valor de ${money(plan.price)}.\nPedido: ${orderId}${extra}\n\nVou enviar o comprovante agora para você conferir e gerar minha key.`;
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+function trialMessage() {
+  return "Olá! Quero solicitar o teste grátis da Satanabe Store. Pode me orientar sobre a disponibilidade?";
+}
+
+function openWhatsApp(message) {
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+  window.location.href = url;
+}
+
+function bindTrialButtons() {
+  document.querySelectorAll("[data-trial]").forEach(button => {
+    button.addEventListener("click", () => openWhatsApp(trialMessage()));
+  });
+}
+
+function paymentMessage(plan, orderId) {
+  const name = document.getElementById("customerName")?.value.trim() || "";
+  const phone = normalizePhone(document.getElementById("customerPhone")?.value || "");
+  const details = [
+    "Olá! Fiz o PIX na Satanabe Store.",
+    `Plano: ${plan.label}`,
+    `Valor: ${money(plan.price)}`,
+    `Pedido: ${orderId}`,
+    name ? `Nome: ${name}` : "",
+    phone ? `Meu WhatsApp: ${phone}` : "",
+    "",
+    "Vou enviar o comprovante agora para conferência."
+  ].filter(Boolean);
+  return details.join("\n");
 }
 
 function initCheckout() {
   const title = document.getElementById("checkoutPlan");
   if (!title) return;
 
-  const params = new URLSearchParams(location.search);
-  const plan = PLANS[params.get("plano")] || PLANS["30d"];
-  const orderId = makeOrderId();
+  const params = new URLSearchParams(window.location.search);
+  const planId = params.get("plano");
+  const plan = PLANS[planId] || PLANS["7d"];
+  const orderId = getOrderId(plan.id);
 
-  title.textContent = plan.label;
+  title.textContent = plan.name;
   document.getElementById("checkoutPrice").textContent = money(plan.price);
   document.getElementById("orderId").textContent = orderId;
-
-  const pixPanel = document.getElementById("pixPanel");
-  const freePanel = document.getElementById("freePanel");
-
-  if (plan.price === 0) {
-    pixPanel.classList.add("hidden");
-    freePanel.classList.remove("hidden");
-    document.getElementById("freeBtn").addEventListener("click", () => {
-      const msg = buildMessage(plan, orderId);
-      location.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
-    });
-    return;
-  }
-
   document.getElementById("pixQr").src = plan.qr;
   document.getElementById("pixCode").value = plan.pix;
 
-  document.getElementById("copyPix").addEventListener("click", async () => {
-    await copyText(plan.pix);
-    showToast("PIX copiado 🔥");
+  const copyButton = document.getElementById("copyPix");
+  copyButton?.addEventListener("click", async () => {
+    try {
+      await copyText(plan.pix);
+      showToast("PIX copiado");
+      copyButton.textContent = "PIX copiado ✓";
+      setTimeout(() => { copyButton.textContent = "Copiar PIX"; }, 1800);
+    } catch {
+      showToast("Não foi possível copiar automaticamente");
+    }
   });
 
-  document.getElementById("paidBtn").addEventListener("click", () => {
-    const msg = buildMessage(plan, orderId);
-    location.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  document.getElementById("paidBtn")?.addEventListener("click", () => {
+    openWhatsApp(paymentMessage(plan, orderId));
   });
 }
 
 renderPlans();
+bindTrialButtons();
 initCheckout();

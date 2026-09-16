@@ -1,25 +1,28 @@
-# Satanabe Store v3
+# Satanabe Store — v1.0 Alpha
 
-Versão final compacta em vermelho + preto, pensada para PC e mobile.
-
-## Mudanças
-- Fonte mais simples e forte
-- Vermelho/preto com alto contraste
-- Emojis 👺🔥👹 integrados ao layout
-- Home bem mais curta
-- Planos em 3 colunas no PC e 2 colunas no mobile
-- Checkout compacto
-- QR Code PIX e Copia e Cola com o valor do plano
-- Botão “Já paguei” abre o WhatsApp
-- Plano de 3 horas continua grátis
+Versão reformulada da Store para GitHub Pages.
 
 ## Publicação
-Suba:
-- index.html
-- pagamento.html
-- styles.css
-- app.js
-- pasta assets
+Envie estes arquivos e a pasta `assets/` para a raiz do repositório:
+- `index.html`
+- `pagamento.html`
+- `styles.css`
+- `app.js`
+- `assets/`
+- `VERSION`
+- `CHANGELOG.md`
 
-No GitHub Pages:
-Settings → Pages → Deploy from a branch → main → /(root)
+## Planos configurados
+- 3 horas — R$ 4
+- 10 horas — R$ 8
+- 1 dia — R$ 14
+- 3 dias — R$ 30
+- 7 dias — R$ 40
+- 1 mês — R$ 70
+- Teste grátis — solicitação separada pelo WhatsApp
+
+## Pagamento
+Os QR Codes e códigos PIX foram gerados a partir do PIX Copia e Cola fornecido para a Store, com o valor de cada plano preenchido no payload.
+
+## Observação
+A liberação da key continua manual pelo WhatsApp após a conferência do comprovante.
