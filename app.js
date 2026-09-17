@@ -177,66 +177,45 @@ function initCheckout() {
   });
 }
 
-function prettyVideoName(filename) {
-  return filename
-    .replace(/\.[^.]+$/, "")
-    .replace(/[-_]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .replace(/\b\w/g, char => char.toUpperCase());
-}
+const YOUTUBE_VIDEOS = [
+  { id: "o0QebYpxfCA", title: "Demonstração 01" },
+  { id: "PXmhWlTUtaA", title: "Demonstração 02" },
+  { id: "f8fMdw7Pz6U", title: "Demonstração 03" }
+];
 
-function renderVideoCard(grid, file) {
+function renderYouTubeCard(grid, item) {
   const card = document.createElement("article");
-  card.className = "video-card";
+  card.className = "video-card youtube-card";
 
-  const video = document.createElement("video");
-  video.controls = true;
-  video.playsInline = true;
-  video.preload = "metadata";
-  video.src = `videos/${encodeURIComponent(file.name)}`;
-  video.setAttribute("aria-label", prettyVideoName(file.name));
+  const frameWrap = document.createElement("div");
+  frameWrap.className = "youtube-frame";
+
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube-nocookie.com/embed/${item.id}?rel=0&playsinline=1`;
+  iframe.title = item.title;
+  iframe.loading = "lazy";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+  iframe.allowFullscreen = true;
+  frameWrap.appendChild(iframe);
 
   const info = document.createElement("div");
   info.className = "video-info";
   const title = document.createElement("strong");
-  title.textContent = prettyVideoName(file.name);
+  title.textContent = item.title;
   const meta = document.createElement("span");
-  meta.textContent = "Demonstração em vídeo";
+  meta.textContent = "YouTube Shorts";
   info.append(title, meta);
 
-  card.append(video, info);
+  card.append(frameWrap, info);
   grid.appendChild(card);
 }
 
-async function loadVideos() {
+function loadVideos() {
   const grid = document.getElementById("videosGrid");
   if (!grid) return;
-
-  try {
-    const response = await fetch(`https://api.github.com/repos/${SITE_REPO}/contents/videos`, {
-      headers: { "Accept": "application/vnd.github+json" },
-      cache: "no-store"
-    });
-    if (!response.ok) throw new Error(`GitHub ${response.status}`);
-    const entries = await response.json();
-    const supported = /\.(mp4|webm|mov|m4v)$/i;
-    const files = Array.isArray(entries)
-      ? entries.filter(item => item.type === "file" && supported.test(item.name))
-      : [];
-
-    grid.innerHTML = "";
-    if (!files.length) {
-      grid.innerHTML = `<div class="videos-empty"><b>Nenhum vídeo adicionado ainda.</b><span>Envie um arquivo .mp4, .webm, .mov ou .m4v para a pasta <code>videos/</code> do repositório.</span></div>`;
-      return;
-    }
-
-    files.sort((a, b) => a.name.localeCompare(b.name, "pt-BR", { numeric: true }));
-    files.forEach(file => renderVideoCard(grid, file));
-  } catch (error) {
-    grid.innerHTML = `<div class="videos-empty"><b>Não foi possível listar os vídeos agora.</b><span>Os arquivos continuam na pasta <code>videos/</code>. Recarregue a página depois.</span></div>`;
-    console.warn("Satanabe Store: falha ao carregar vídeos", error);
-  }
+  grid.innerHTML = "";
+  YOUTUBE_VIDEOS.forEach(item => renderYouTubeCard(grid, item));
 }
 
 function initGallery() {

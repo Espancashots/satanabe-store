@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2 Alpha
+- A seção **Como funciona** agora reproduz 3 vídeos do YouTube Shorts diretamente no site.
+- Removida a dependência de upload de vídeos pesados para o GitHub.
+- Player vertical otimizado para Shorts, com carregamento sob demanda.
+
+# Changelog
+
 ## v1.1 Alpha — 2026-09-16
 - Criada estrutura de subpáginas para produtos.
 - Página inicial mantém o visual da v1.0 e passa a mostrar o produto “Satanabe External iOS”.

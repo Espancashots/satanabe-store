@@ -1,4 +1,4 @@
-# Satanabe Store — v1.1 Alpha
+# Satanabe Store — v1.2 Alpha
 
 Versão da Store para GitHub Pages com produtos organizados em subpáginas.
 
@@ -40,3 +40,7 @@ A página inicial consulta a pasta pública do repositório pelo GitHub e exibe 
 
 ## Pagamento
 Os QR Codes e códigos PIX continuam com os mesmos valores da versão anterior. A liberação da key continua manual pelo WhatsApp após a conferência do comprovante.
+
+
+## Vídeos
+A seção **Como funciona** agora usa embeds do YouTube Shorts. Não é necessário enviar arquivos grandes para a pasta `videos/`.
