@@ -22,7 +22,7 @@
   <meta name="twitter:title" content="Satanabe Store">
   <meta name="twitter:description" content="Planos, pagamento via PIX e atendimento pelo WhatsApp.">
   <meta name="twitter:image" content="https://espancashots.github.io/satanabe-store/assets/satanabe-preview.jpg">
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="stylesheet" href="styles.css?v=11">
 </head>
 <body>
   <header class="topbar">
@@ -69,26 +69,57 @@
       <div class="section-heading">
         <div>
           <span class="eyebrow"><i></i> PLANOS</span>
-          <h2>ESCOLHA SEU TEMPO</h2>
-          <p>Valores atuais da Satanabe Store. Pagamento único.</p>
+          <h2>ESCOLHA SEU PRODUTO</h2>
+          <p>Cada produto agora tem sua própria página com opções de tempo, valores e demonstrações.</p>
         </div>
         <button class="text-action" type="button" data-trial>Quero testar grátis →</button>
       </div>
-      <div id="plansGrid" class="plans-grid" aria-live="polite"></div>
+
+      <article class="product-card product-card-external">
+        <div class="product-shot">
+          <img src="assets/satanabe-external-ios-panel.jpeg" alt="Painel do Satanabe External iOS" loading="lazy">
+        </div>
+        <div class="product-copy">
+          <span class="product-kicker">iOS • Satanabe Store</span>
+          <h3>SATANABE EXTERNAL IOS</h3>
+          <p>Abra a página do produto para ver os tempos disponíveis, valores e imagens de demonstração.</p>
+          <div class="product-chips" aria-label="Tempos disponíveis">
+            <span>3h</span><span>10h</span><span>1 dia</span><span>3 dias</span><span>7 dias</span><span>1 mês</span>
+          </div>
+          <div class="product-actions">
+            <a class="btn btn-primary" href="planos/satanabe-external-ios/">Ver opções e valores</a>
+            <button class="btn btn-soft" type="button" data-trial>Teste grátis</button>
+          </div>
+        </div>
+      </article>
     </section>
 
     <section id="como-funciona" class="section how-section">
       <div class="section-heading compact-heading">
         <div>
-          <span class="eyebrow"><i></i> PASSO A PASSO</span>
-          <h2>SEM COMPLICAÇÃO</h2>
+          <span class="eyebrow"><i></i> COMO FUNCIONA</span>
+          <h2>PASSO A PASSO + VÍDEOS</h2>
+          <p>Veja o fluxo da compra e os vídeos adicionados pela Satanabe Store.</p>
         </div>
       </div>
       <div class="steps-grid">
-        <article class="step-card"><span>01</span><h3>Escolha</h3><p>Selecione o período que combina com o que você precisa.</p></article>
+        <article class="step-card"><span>01</span><h3>Escolha</h3><p>Abra o produto e selecione o período que combina com o que você precisa.</p></article>
         <article class="step-card"><span>02</span><h3>Pague</h3><p>O checkout mostra o PIX Copia e Cola e o QR Code já com o valor do plano.</p></article>
         <article class="step-card"><span>03</span><h3>Comprove</h3><p>Depois do pagamento, toque em “Já paguei” e envie o comprovante no WhatsApp.</p></article>
         <article class="step-card"><span>04</span><h3>Receba</h3><p>Após a conferência do pagamento, o atendimento envia sua key.</p></article>
+      </div>
+
+      <div class="videos-block">
+        <div class="videos-heading">
+          <div>
+            <span class="eyebrow"><i></i> DEMONSTRAÇÕES</span>
+            <h3>VÍDEOS</h3>
+          </div>
+          <span class="videos-auto-badge">Atualização automática</span>
+        </div>
+        <div id="videosGrid" class="videos-grid" aria-live="polite">
+          <div class="videos-empty">Carregando vídeos…</div>
+        </div>
       </div>
     </section>
 
@@ -147,11 +178,11 @@
     <div class="footer-inner">
       <a class="brand footer-brand" href="#top"><span class="brand-mark">S</span><span class="brand-copy"><b>SATANABE</b><small>STORE</small></span></a>
       <p>Pagamento via PIX • Atendimento pelo WhatsApp</p>
-      <small>© 2026 Satanabe Store • v1.0 Alpha</small>
+      <small>© 2026 Satanabe Store • v1.1 Alpha</small>
     </div>
   </footer>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=10"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 const WHATSAPP = "5521987269193";
+const SITE_REPO = "espancashots/satanabe-store";
+const ROOT = document.body?.dataset?.root || "";
 
 const PLANS = {
   "3h": {
@@ -41,11 +43,8 @@ function normalizePhone(value = "") {
   return value.replace(/\D/g, "").slice(0, 15);
 }
 
-function renderPlans() {
-  const grid = document.getElementById("plansGrid");
-  if (!grid) return;
-
-  grid.innerHTML = Object.values(PLANS).map((plan, index) => `
+function planCard(plan, index, prefix = "") {
+  return `
     <article class="plan-card ${plan.tag ? "featured" : ""}">
       <div class="plan-card-top">
         <span class="plan-number">0${index + 1}</span>
@@ -54,10 +53,22 @@ function renderPlans() {
       <h3>${plan.name}</h3>
       <p>${plan.note}</p>
       <div class="plan-price"><strong>${money(plan.price)}</strong><small>pagamento único</small></div>
-      <a class="btn btn-primary btn-full" href="pagamento.html?plano=${plan.id}">Comprar</a>
+      <a class="btn btn-primary btn-full" href="${prefix}pagamento.html?plano=${plan.id}">Comprar</a>
       ${plan.id === "3h" ? `<button class="plan-trial" type="button" data-trial>ou solicitar teste grátis</button>` : ""}
     </article>
-  `).join("");
+  `;
+}
+
+function renderPlans() {
+  const grid = document.getElementById("plansGrid");
+  if (!grid) return;
+  grid.innerHTML = Object.values(PLANS).map((plan, index) => planCard(plan, index)).join("");
+}
+
+function renderExternalPlans() {
+  const grid = document.getElementById("externalPlansGrid");
+  if (!grid) return;
+  grid.innerHTML = Object.values(PLANS).map((plan, index) => planCard(plan, index, ROOT)).join("");
 }
 
 function getOrderId(planId = "") {
@@ -101,7 +112,7 @@ function showToast(message) {
 }
 
 function trialMessage() {
-  return "Olá! Quero solicitar o teste grátis da Satanabe Store. Pode me orientar sobre a disponibilidade?";
+  return "Olá! Quero solicitar o teste grátis do Satanabe External iOS. Pode me orientar sobre a disponibilidade?";
 }
 
 function openWhatsApp(message) {
@@ -111,6 +122,8 @@ function openWhatsApp(message) {
 
 function bindTrialButtons() {
   document.querySelectorAll("[data-trial]").forEach(button => {
+    if (button.dataset.boundTrial === "1") return;
+    button.dataset.boundTrial = "1";
     button.addEventListener("click", () => openWhatsApp(trialMessage()));
   });
 }
@@ -120,6 +133,7 @@ function paymentMessage(plan, orderId) {
   const phone = normalizePhone(document.getElementById("customerPhone")?.value || "");
   const details = [
     "Olá! Fiz o PIX na Satanabe Store.",
+    "Produto: Satanabe External iOS",
     `Plano: ${plan.label}`,
     `Valor: ${money(plan.price)}`,
     `Pedido: ${orderId}`,
@@ -163,6 +177,101 @@ function initCheckout() {
   });
 }
 
+function prettyVideoName(filename) {
+  return filename
+    .replace(/\.[^.]+$/, "")
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+function renderVideoCard(grid, file) {
+  const card = document.createElement("article");
+  card.className = "video-card";
+
+  const video = document.createElement("video");
+  video.controls = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.src = `videos/${encodeURIComponent(file.name)}`;
+  video.setAttribute("aria-label", prettyVideoName(file.name));
+
+  const info = document.createElement("div");
+  info.className = "video-info";
+  const title = document.createElement("strong");
+  title.textContent = prettyVideoName(file.name);
+  const meta = document.createElement("span");
+  meta.textContent = "Demonstração em vídeo";
+  info.append(title, meta);
+
+  card.append(video, info);
+  grid.appendChild(card);
+}
+
+async function loadVideos() {
+  const grid = document.getElementById("videosGrid");
+  if (!grid) return;
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${SITE_REPO}/contents/videos`, {
+      headers: { "Accept": "application/vnd.github+json" },
+      cache: "no-store"
+    });
+    if (!response.ok) throw new Error(`GitHub ${response.status}`);
+    const entries = await response.json();
+    const supported = /\.(mp4|webm|mov|m4v)$/i;
+    const files = Array.isArray(entries)
+      ? entries.filter(item => item.type === "file" && supported.test(item.name))
+      : [];
+
+    grid.innerHTML = "";
+    if (!files.length) {
+      grid.innerHTML = `<div class="videos-empty"><b>Nenhum vídeo adicionado ainda.</b><span>Envie um arquivo .mp4, .webm, .mov ou .m4v para a pasta <code>videos/</code> do repositório.</span></div>`;
+      return;
+    }
+
+    files.sort((a, b) => a.name.localeCompare(b.name, "pt-BR", { numeric: true }));
+    files.forEach(file => renderVideoCard(grid, file));
+  } catch (error) {
+    grid.innerHTML = `<div class="videos-empty"><b>Não foi possível listar os vídeos agora.</b><span>Os arquivos continuam na pasta <code>videos/</code>. Recarregue a página depois.</span></div>`;
+    console.warn("Satanabe Store: falha ao carregar vídeos", error);
+  }
+}
+
+function initGallery() {
+  const modal = document.getElementById("galleryModal");
+  const image = document.getElementById("galleryImage");
+  if (!modal || !image) return;
+
+  const close = () => {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    image.src = "";
+    document.body.classList.remove("modal-open");
+  };
+
+  document.querySelectorAll("[data-gallery]").forEach(button => {
+    button.addEventListener("click", () => {
+      image.src = button.dataset.gallery;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    });
+  });
+
+  modal.querySelector(".gallery-close")?.addEventListener("click", close);
+  modal.addEventListener("click", event => {
+    if (event.target === modal) close();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("open")) close();
+  });
+}
+
 renderPlans();
+renderExternalPlans();
 bindTrialButtons();
 initCheckout();
+loadVideos();
+initGallery();

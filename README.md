@@ -1,18 +1,22 @@
-# Satanabe Store — v1.0 Alpha
+# Satanabe Store — v1.1 Alpha
 
-Versão reformulada da Store para GitHub Pages.
+Versão da Store para GitHub Pages com produtos organizados em subpáginas.
 
 ## Publicação
-Envie estes arquivos e a pasta `assets/` para a raiz do repositório:
-- `index.html`
-- `pagamento.html`
+Envie todo o conteúdo deste ZIP para a raiz do repositório `satanabe-store`.
+
+Estrutura principal:
+- `index.html` — página inicial
+- `pagamento.html` — checkout PIX
+- `planos/satanabe-external-ios/` — subpágina do Satanabe External iOS
+- `videos/` — vídeos da seção “Como funciona”
+- `assets/` — imagens, QR Codes e artes
 - `styles.css`
 - `app.js`
-- `assets/`
 - `VERSION`
 - `CHANGELOG.md`
 
-## Planos configurados
+## Satanabe External iOS
 - 3 horas — R$ 4
 - 10 horas — R$ 8
 - 1 dia — R$ 14
@@ -21,8 +25,18 @@ Envie estes arquivos e a pasta `assets/` para a raiz do repositório:
 - 1 mês — R$ 70
 - Teste grátis — solicitação separada pelo WhatsApp
 
-## Pagamento
-Os QR Codes e códigos PIX foram gerados a partir do PIX Copia e Cola fornecido para a Store, com o valor de cada plano preenchido no payload.
+## Como adicionar vídeos sem editar o HTML
+Coloque os arquivos diretamente na pasta `videos/` do repositório.
 
-## Observação
-A liberação da key continua manual pelo WhatsApp após a conferência do comprovante.
+Formatos aceitos pela listagem automática:
+- `.mp4`
+- `.webm`
+- `.mov`
+- `.m4v`
+
+A página inicial consulta a pasta pública do repositório pelo GitHub e exibe automaticamente os vídeos encontrados. Os players usam `preload="metadata"`, evitando baixar o vídeo inteiro antes de o visitante dar play.
+
+> Recomendado: MP4 com H.264 para maior compatibilidade em iPhone e navegadores.
+
+## Pagamento
+Os QR Codes e códigos PIX continuam com os mesmos valores da versão anterior. A liberação da key continua manual pelo WhatsApp após a conferência do comprovante.
