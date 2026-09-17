@@ -1,8 +1,6 @@
 # Changelog
 
-## v1.4 Alpha
-- Interface refeita em estilo de loja, inspirada na navegação do site antigo DGZADAXFF.
-- Home com banner, categorias populares, vídeos, produto em destaque e navegação móvel.
-- Satanabe External iOS ganhou página de produto completa com galeria, preço inicial e opções de duração.
-- Checkout redesenhado sem alterar os dados PIX nem o fluxo para WhatsApp.
-- Mantidos os 3 YouTube Shorts e as 4 imagens de demonstração.
+## v1.4.1
+- Corrigida a rota `/planos/`, que não possuía um `index.html` e podia abrir uma tela em branco no GitHub Pages.
+- Adicionada página de Planos com acesso ao Satanabe External iOS.
+- Atualizados cache-busters de CSS e JS.
