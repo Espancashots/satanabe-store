@@ -3,64 +3,61 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#070709">
   <meta name="color-scheme" content="dark">
-  <title>Pagamento — Satanabe Store</title>
-  <meta name="description" content="Checkout da Satanabe Store via PIX.">
-  <link rel="stylesheet" href="styles.css?v=11">
+  <title>Checkout — Satanabe Store</title>
+  <meta name="description" content="Checkout Satanabe Store via PIX.">
+  <link rel="stylesheet" href="styles.css?v=14">
 </head>
 <body class="checkout-page">
-  <header class="topbar">
-    <a class="brand" href="index.html" aria-label="Voltar para Satanabe Store">
-      <span class="brand-mark">S</span>
-      <span class="brand-copy"><b>SATANABE</b><small>STORE</small></span>
-    </a>
-    <a class="btn btn-ghost btn-small" href="index.html#planos">← Voltar aos planos</a>
+  <header class="store-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">S</span><span class="brand-copy"><b>SATANABE</b><small>STORE</small></span></a>
+      <span class="secure-label">CHECKOUT SEGURO</span>
+      <a class="icon-action" href="index.html#produto" aria-label="Voltar">←</a>
+    </div>
   </header>
 
   <main class="checkout-main">
-    <div class="checkout-title">
-      <span class="eyebrow"><i></i> CHECKOUT</span>
-      <h1>FINALIZE SEU PEDIDO</h1>
-      <p>Confira o plano e faça o PIX. Depois, envie o comprovante pelo WhatsApp.</p>
+    <div class="checkout-heading">
+      <span class="section-kicker">FINALIZAR COMPRA</span>
+      <h1>Checkout</h1>
+      <p>Confira os dados do pedido, faça o PIX e envie o comprovante.</p>
     </div>
 
     <div class="checkout-grid">
       <section class="order-card">
-        <div class="order-head">
-          <span class="plan-icon" id="checkoutIcon">S</span>
-          <div><small>Plano escolhido</small><h2 id="checkoutPlan">—</h2></div>
+        <div class="checkout-card-title"><span class="checkout-step">1</span><div><small>SEU PEDIDO</small><h2>Resumo da compra</h2></div></div>
+        <div class="selected-product-mini">
+          <div class="selected-product-icon">S</div>
+          <div><small>Satanabe External iOS</small><b id="checkoutPlan">—</b></div>
+          <strong id="checkoutPrice">—</strong>
         </div>
-        <div class="checkout-price" id="checkoutPrice">—</div>
         <dl class="order-meta">
           <div><dt>Pedido</dt><dd id="orderId">—</dd></div>
           <div><dt>Pagamento</dt><dd>PIX</dd></div>
           <div><dt>Atendimento</dt><dd>WhatsApp</dd></div>
         </dl>
         <div class="checkout-fields">
-          <label>Seu nome <small>opcional</small><input id="customerName" type="text" autocomplete="name" placeholder="Nome"></label>
-          <label>Seu WhatsApp <small>opcional</small><input id="customerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(21) 99999-9999"></label>
+          <label>Nome <small>opcional</small><input id="customerName" type="text" autocomplete="name" placeholder="Seu nome"></label>
+          <label>WhatsApp <small>opcional</small><input id="customerPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(21) 99999-9999"></label>
         </div>
-        <div class="order-note">Esses dados servem apenas para facilitar a identificação do pedido na conversa do WhatsApp.</div>
       </section>
 
-      <section id="pixPanel" class="payment-card">
-        <div class="payment-head">
-          <div><span class="eyebrow"><i></i> PIX</span><h2>PAGAMENTO</h2></div>
-          <span class="status-pill">Aguardando</span>
-        </div>
-        <div class="qr-wrap"><img id="pixQr" src="" alt="QR Code PIX do plano selecionado"></div>
+      <section class="payment-card" id="pixPanel">
+        <div class="checkout-card-title"><span class="checkout-step">2</span><div><small>PAGAMENTO</small><h2>PIX</h2></div><span class="status-pill">Aguardando</span></div>
+        <div class="qr-wrap"><img id="pixQr" src="" alt="QR Code PIX"></div>
         <div class="receiver"><span>Recebedor</span><strong>JOAO P M BAPTISTA</strong></div>
         <label class="pix-code-label">PIX Copia e Cola<textarea id="pixCode" rows="3" readonly></textarea></label>
-        <button id="copyPix" class="btn btn-soft btn-full" type="button">Copiar PIX</button>
-        <div class="checkout-warning"><b>Depois do pagamento:</b> toque em “Já paguei” e envie o comprovante na conversa que abrir.</div>
+        <button id="copyPix" class="btn btn-dark btn-full" type="button">Copiar PIX</button>
+        <div class="checkout-warning"><b>Depois de pagar:</b> toque no botão abaixo e envie o comprovante no WhatsApp.</div>
         <button id="paidBtn" class="btn btn-primary btn-full btn-large" type="button">Já paguei — enviar comprovante</button>
-        <a class="help-link" href="https://wa.me/5521987269193" target="_blank" rel="noopener">Preciso de ajuda com o pagamento</a>
+        <a class="help-link" href="https://wa.me/5521987269193" target="_blank" rel="noopener">Preciso de ajuda</a>
       </section>
     </div>
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>
