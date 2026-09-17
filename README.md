@@ -1,4 +1,4 @@
-# Satanabe Store — v1.2 Alpha
+# Satanabe Store — v1.3 Alpha
 
 Versão da Store para GitHub Pages com produtos organizados em subpáginas.
 
@@ -44,3 +44,7 @@ Os QR Codes e códigos PIX continuam com os mesmos valores da versão anterior. 
 
 ## Vídeos
 A seção **Como funciona** agora usa embeds do YouTube Shorts. Não é necessário enviar arquivos grandes para a pasta `videos/`.
+
+
+## Ordem da página inicial na v1.3
+A seção **Como funciona**, incluindo os 3 vídeos do YouTube, aparece antes do card **Satanabe External iOS**.

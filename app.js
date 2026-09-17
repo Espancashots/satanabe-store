@@ -177,47 +177,6 @@ function initCheckout() {
   });
 }
 
-const YOUTUBE_VIDEOS = [
-  { id: "o0QebYpxfCA", title: "Demonstração 01" },
-  { id: "PXmhWlTUtaA", title: "Demonstração 02" },
-  { id: "f8fMdw7Pz6U", title: "Demonstração 03" }
-];
-
-function renderYouTubeCard(grid, item) {
-  const card = document.createElement("article");
-  card.className = "video-card youtube-card";
-
-  const frameWrap = document.createElement("div");
-  frameWrap.className = "youtube-frame";
-
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://www.youtube-nocookie.com/embed/${item.id}?rel=0&playsinline=1`;
-  iframe.title = item.title;
-  iframe.loading = "lazy";
-  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-  iframe.referrerPolicy = "strict-origin-when-cross-origin";
-  iframe.allowFullscreen = true;
-  frameWrap.appendChild(iframe);
-
-  const info = document.createElement("div");
-  info.className = "video-info";
-  const title = document.createElement("strong");
-  title.textContent = item.title;
-  const meta = document.createElement("span");
-  meta.textContent = "YouTube Shorts";
-  info.append(title, meta);
-
-  card.append(frameWrap, info);
-  grid.appendChild(card);
-}
-
-function loadVideos() {
-  const grid = document.getElementById("videosGrid");
-  if (!grid) return;
-  grid.innerHTML = "";
-  YOUTUBE_VIDEOS.forEach(item => renderYouTubeCard(grid, item));
-}
-
 function initGallery() {
   const modal = document.getElementById("galleryModal");
   const image = document.getElementById("galleryImage");
@@ -252,5 +211,4 @@ renderPlans();
 renderExternalPlans();
 bindTrialButtons();
 initCheckout();
-loadVideos();
 initGallery();

@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.3 Alpha
+- A seção **Como funciona + Vídeos** agora aparece antes de **Satanabe External iOS** na página inicial.
+- Os 3 vídeos do YouTube foram incorporados diretamente no HTML para evitar o erro de busca da antiga pasta `videos/`.
+- Mantidos os planos, preços, checkout, imagens e demais recursos da v1.2.
+
 ## v1.2 Alpha
 - A seção **Como funciona** agora reproduz 3 vídeos do YouTube Shorts diretamente no site.
 - Removida a dependência de upload de vídeos pesados para o GitHub.
