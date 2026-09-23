@@ -2,7 +2,7 @@ const WHATSAPP = "5521987269193";
 const SITE_REPO = "espancashots/satanabe-store";
 const ROOT = document.body?.dataset?.root || "";
 
-const PLANS = {
+const EXTERNAL_PLANS = {
   "3h": {
     id: "3h", name: "3 HORAS", label: "3 horas", price: 4,
     note: "Plano de entrada", qr: "assets/pix-3h.png",
@@ -35,6 +35,17 @@ const PLANS = {
   }
 };
 
+const RESELLER_PLANS = {
+  "rev-7d": { id: "rev-7d", name: "1 SEMANA", label: "1 semana", price: 100, note: "Acesso por 7 dias", tag: "REVENDEDOR", qr: "assets/pix-rev-7d.png", pix: '00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe5204000053039865406100.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***63046341' },
+  "rev-1m": { id: "rev-1m", name: "1 MÊS", label: "1 mês", price: 170, note: "Acesso por 1 mês", tag: "POPULAR", qr: "assets/pix-rev-1m.png", pix: '00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe5204000053039865406170.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***630458BD' },
+  "rev-3m": { id: "rev-3m", name: "3 MESES", label: "3 meses", price: 500, note: "Acesso por 3 meses", tag: "MAIOR DURAÇÃO", qr: "assets/pix-rev-3m.png", pix: '00020101021126580014br.gov.bcb.pix01360c0f1a70-bf41-4479-a66d-c6a527cf76fe5204000053039865406500.005802BR5917JOAO P M BAPTISTA6013CACHOEIRAS DE62070503***630491AC' }
+};
+
+const PRODUCTS = {
+  external: { id: "external", name: "Satanabe External iOS", plans: EXTERNAL_PLANS },
+  revendedor: { id: "revendedor", name: "Painel Revendedor", plans: RESELLER_PLANS }
+};
+
 function money(value) {
   return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 0 }).format(value);
 }
@@ -43,7 +54,7 @@ function normalizePhone(value = "") {
   return value.replace(/\D/g, "").slice(0, 15);
 }
 
-function planCard(plan, index, prefix = "") {
+function planCard(plan, index, prefix = "", productId = "external") {
   return `
     <article class="plan-card ${plan.tag ? "featured" : ""}">
       <div class="plan-card-top">
@@ -53,7 +64,7 @@ function planCard(plan, index, prefix = "") {
       <h3>${plan.name}</h3>
       <p>${plan.note}</p>
       <div class="plan-price"><strong>${money(plan.price)}</strong><small>pagamento único</small></div>
-      <a class="btn btn-primary btn-full" href="${prefix}pagamento.html?plano=${plan.id}">Comprar</a>
+      <a class="btn btn-primary btn-full" href="${prefix}pagamento.html?produto=${productId}&plano=${plan.id}">Comprar</a>
       ${plan.id === "3h" ? `<button class="plan-trial" type="button" data-trial>ou solicitar teste grátis</button>` : ""}
     </article>
   `;
@@ -62,13 +73,19 @@ function planCard(plan, index, prefix = "") {
 function renderPlans() {
   const grid = document.getElementById("plansGrid");
   if (!grid) return;
-  grid.innerHTML = Object.values(PLANS).map((plan, index) => planCard(plan, index)).join("");
+  grid.innerHTML = Object.values(EXTERNAL_PLANS).map((plan, index) => planCard(plan, index, "", "external")).join("");
 }
 
 function renderExternalPlans() {
   const grid = document.getElementById("externalPlansGrid");
   if (!grid) return;
-  grid.innerHTML = Object.values(PLANS).map((plan, index) => planCard(plan, index, ROOT)).join("");
+  grid.innerHTML = Object.values(EXTERNAL_PLANS).map((plan, index) => planCard(plan, index, ROOT, "external")).join("");
+}
+
+function renderResellerPlans() {
+  const grid = document.getElementById("resellerPlansGrid");
+  if (!grid) return;
+  grid.innerHTML = Object.values(RESELLER_PLANS).map((plan, index) => planCard(plan, index, ROOT, "revendedor")).join("");
 }
 
 function getOrderId(planId = "") {
@@ -128,12 +145,12 @@ function bindTrialButtons() {
   });
 }
 
-function paymentMessage(plan, orderId) {
+function paymentMessage(product, plan, orderId) {
   const name = document.getElementById("customerName")?.value.trim() || "";
   const phone = normalizePhone(document.getElementById("customerPhone")?.value || "");
   const details = [
     "Olá! Fiz o PIX na Satanabe Store.",
-    "Produto: Satanabe External iOS",
+    `Produto: ${product.name}`,
     `Plano: ${plan.label}`,
     `Valor: ${money(plan.price)}`,
     `Pedido: ${orderId}`,
@@ -150,10 +167,15 @@ function initCheckout() {
   if (!title) return;
 
   const params = new URLSearchParams(window.location.search);
+  const productId = params.get("produto") || "external";
+  const product = PRODUCTS[productId] || PRODUCTS.external;
   const planId = params.get("plano");
-  const plan = PLANS[planId] || PLANS["7d"];
-  const orderId = getOrderId(plan.id);
+  const fallbackId = product.id === "revendedor" ? "rev-7d" : "7d";
+  const plan = product.plans[planId] || product.plans[fallbackId];
+  const orderId = getOrderId(`${product.id}-${plan.id}`);
 
+  const productLabel = document.getElementById("checkoutProduct");
+  if (productLabel) productLabel.textContent = product.name;
   title.textContent = plan.name;
   document.getElementById("checkoutPrice").textContent = money(plan.price);
   document.getElementById("orderId").textContent = orderId;
@@ -173,7 +195,7 @@ function initCheckout() {
   });
 
   document.getElementById("paidBtn")?.addEventListener("click", () => {
-    openWhatsApp(paymentMessage(plan, orderId));
+    openWhatsApp(paymentMessage(product, plan, orderId));
   });
 }
 
@@ -209,6 +231,7 @@ function initGallery() {
 
 renderPlans();
 renderExternalPlans();
+renderResellerPlans();
 bindTrialButtons();
 initCheckout();
 initGallery();

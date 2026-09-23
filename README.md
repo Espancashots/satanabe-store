@@ -4,3 +4,7 @@ Versão com interface de e-commerce renovada, mantendo o conteúdo, planos, PIX,
 
 ## Publicação
 Envie todo o conteúdo deste ZIP para a raiz do repositório `satanabe-store` no GitHub Pages, substituindo os arquivos anteriores.
+
+
+## v1.6.0
+Agora a loja possui Satanabe External iOS e Painel Revendedor.

@@ -47,3 +47,7 @@ main{width:min(calc(100% - 34px),var(--content));margin:auto}.hero-banner{positi
   .checkout-grid{grid-template-columns:1fr}.checkout-main{padding-top:30px}.checkout-heading h1{font-size:36px}.order-card,.payment-card{padding:16px}.qr-wrap{width:min(240px,82%)}.checkout-page{padding-bottom:0}
 }
 @media(max-width:430px){.quick-benefits article{padding:12px}.quick-benefits article>span{width:34px;height:34px}.hero-banner h1{font-size:40px}.plans-grid{grid-template-columns:1fr 1fr}.product-buy-row .btn{padding-left:12px;padding-right:12px}.detail-main-image{height:390px}.detail-facts{grid-template-columns:repeat(3,1fr)}}
+
+/* v1.6.0 — múltiplos produtos */
+.products-list{display:grid;gap:16px}.category-card+.category-card{margin-top:14px}.category-card-secondary{height:290px}.category-card-secondary .category-image img{object-position:center}.detail-thumbs-five{grid-template-columns:repeat(5,1fr)}.reseller-media .detail-main-image img{object-position:center}.reseller-plans{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.products-list{gap:12px}.category-card-secondary{height:310px}.detail-thumbs-five{grid-template-columns:repeat(5,1fr);gap:5px}.detail-thumbs-five button{border-radius:8px}.reseller-plans{grid-template-columns:1fr 1fr}.reseller-plans .plan-card:last-child{grid-column:1/-1}.reseller-flow{grid-template-columns:1fr 1fr}}
