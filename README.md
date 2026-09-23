@@ -1,10 +1,6 @@
-# Satanabe Store v1.4 Alpha
+# Satanabe Store v1.7.0
 
-Versão com interface de e-commerce renovada, mantendo o conteúdo, planos, PIX, YouTube e WhatsApp já configurados.
+Versão com foco em conversão rápida no mobile: produtos em destaque lado a lado no topo, visual mais direto e página de planos consistente com a home.
 
 ## Publicação
 Envie todo o conteúdo deste ZIP para a raiz do repositório `satanabe-store` no GitHub Pages, substituindo os arquivos anteriores.
-
-
-## v1.6.0
-Agora a loja possui Satanabe External iOS e Painel Revendedor.
